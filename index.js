@@ -1,12 +1,20 @@
-const Pageres = require('pageres');
-
-const logger = require('./lib/logger');
+const puppeteer = require('puppeteer');
 
 (async () => {
-  await new Pageres({delay: 2})
-    .src('https://github.com/', ['480x320', '1024x768', 'iphone 5s'], {crop: true})
-    .dest(__dirname)
-    .run();
+  const browser = await puppeteer.launch({executablePath: '/usr/bin/google-chrome'});
+  const page = await browser.newPage();
+  await page.goto('https://github.com/');
 
-    logger.info('Finished generating screenshots!');
+  // Get the "viewport" of the page, as reported by the page.
+  const dimensions = await page.evaluate(() => {
+    return {
+      width: document.documentElement.clientWidth,
+      height: document.documentElement.clientHeight,
+      deviceScaleFactor: window.devicePixelRatio
+    };
+  });
+
+  console.log('Dimensions:', dimensions);
+
+  await browser.close();
 })();
