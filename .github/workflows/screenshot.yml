@@ -12,6 +12,12 @@ jobs:
       uses: actions/checkout@v1.0.0
 
     - name: Capture Screenshot
+      id: screenshot
       uses: ./
       with:
         url: https://github.com/
+
+    - uses: actions/upload-artifact@v1
+      with:
+        name: my-screenshot
+        path: ${{ steps.screenshot.outputs.path }}

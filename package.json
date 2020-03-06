@@ -18,6 +18,7 @@
     "package": "ncc build index.js -o dist"
   },
   "dependencies": {
+    "@actions/core": "^1.2.3",
     "bunyan": "^1.8.12",
     "bunyan-format": "^0.2.1",
     "dotenv": "^8.2.0",
