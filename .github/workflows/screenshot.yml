@@ -1,0 +1,17 @@
+name: Screenshot
+
+on:
+  push
+
+jobs:
+  screenshot:
+    name: Screenshot
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1.0.0
+
+    - name: Capture Screenshot
+      uses: ./
+      with:
+        url: https://github.com/
