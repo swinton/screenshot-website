@@ -2,8 +2,11 @@ const Pageres = require('pageres');
 
 const logger = require('./lib/logger');
 
-const items = [1, 2, 3, 4, 5];
+(async () => {
+  await new Pageres({delay: 2})
+    .src('https://github.com/', ['480x320', '1024x768', 'iphone 5s'], {crop: true})
+    .dest(__dirname)
+    .run();
 
-const sum = items.reduce((total, item) => total + item, 0);
-
-logger.info(sum);
+    logger.info('Finished generating screenshots!');
+})();
