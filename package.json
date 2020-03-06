@@ -1,0 +1,63 @@
+{
+  "name": "screenshot-url",
+  "version": "0.0.0",
+  "description": "",
+  "author": "Steve Winton <stevewinton@gmail.com> (https://github.com/swinton)",
+  "main": "index.js",
+  "license": "ISC",
+  "keywords": [],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/swinton/screenshot-url.git"
+  },
+  "scripts": {
+    "start": "node ./index.js",
+    "dev": "nodemon",
+    "test": "jest && eslint index.js 'lib/**.js' 'test/**.js'",
+    "lint": "eslint index.js 'lib/**.js' 'test/**.js' --fix",
+    "package": "ncc build index.js -o dist"
+  },
+  "dependencies": {
+    "bunyan": "^1.8.12",
+    "bunyan-format": "^0.2.1",
+    "dotenv": "^8.2.0"
+  },
+  "devDependencies": {
+    "@zeit/ncc": "^0.21.1",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.18.3",
+    "jest": "^25.1.0",
+    "nodemon": "^2.0.2",
+    "prettier": "^1.19.1"
+  },
+  "engines": {
+    "node": ">= 8.3.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "collectCoverageFrom": [
+      "index.js",
+      "lib/*.js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 80,
+        "functions": 80,
+        "lines": 80,
+        "statements": 80
+      }
+    }
+  },
+  "nodemonConfig": {
+    "exec": "npm start",
+    "watch": [
+      ".env",
+      "."
+    ]
+  }
+}
