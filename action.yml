@@ -4,6 +4,10 @@ inputs:
   url:
     description: 'URL to screenshot'
     required: true
+  artifact-name:
+    description: 'The name of the artifact representing the generated screenshot'
+    required: true
+    default: 'my-screenshot'
 outputs:
   path:
     description: 'The filesystem path to the generated screenshot'

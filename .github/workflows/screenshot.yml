@@ -16,8 +16,3 @@ jobs:
       uses: ./
       with:
         url: https://github.com/
-
-    - uses: actions/upload-artifact@v1
-      with:
-        name: my-screenshot
-        path: ${{ steps.screenshot.outputs.path }}
