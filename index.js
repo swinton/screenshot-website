@@ -3,6 +3,7 @@ const path = require('path');
 const captureWebsite = require('capture-website');
 const core = require('@actions/core');
 const artifact = require('@actions/artifact');
+const io = require('@actions/io');
 
 (async () => {
   // Write to temporary directory
@@ -10,8 +11,15 @@ const artifact = require('@actions/artifact');
   const destFile = 'screenshot.png';
   const dest = path.join(destFolder, destFile);
 
+  // Locate google-chrome
+  const executablePath = await io.which('google-chrome');
+
   // Capture and write to dest
-  await captureWebsite.file('https://github.com/swinton', dest, {launchOptions: {executablePath: '/usr/bin/google-chrome'}});
+  await captureWebsite.file('https://github.com/swinton', dest, {
+    launchOptions: {
+      executablePath
+    }
+  });
 
   // Create an artifact
   const artifactClient = artifact.create();
