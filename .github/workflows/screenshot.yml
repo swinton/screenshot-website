@@ -15,4 +15,5 @@ jobs:
       id: screenshot
       uses: ./
       with:
-        url: https://github.com/
+        url: https://github.com/swinton
+        artifact-name: 'github-com-swinton'

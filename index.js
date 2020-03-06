@@ -6,7 +6,10 @@ const artifact = require('@actions/artifact');
 const io = require('@actions/io');
 
 (async () => {
-  // Write to temporary directory
+  // Get URL to screenshot
+  const url = core.getInput('url');
+
+  // Get screenshot destination
   const destFolder = process.env.RUNNER_TEMP;
   const destFile = 'screenshot.png';
   const dest = path.join(destFolder, destFile);
@@ -15,7 +18,7 @@ const io = require('@actions/io');
   const executablePath = await io.which('google-chrome');
 
   // Capture and write to dest
-  await captureWebsite.file('https://github.com/swinton', dest, {
+  await captureWebsite.file(url, dest, {
     launchOptions: {
       executablePath
     }

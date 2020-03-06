@@ -5010,7 +5010,10 @@ const artifact = __webpack_require__(330);
 const io = __webpack_require__(1);
 
 (async () => {
-  // Write to temporary directory
+  // Get URL to screenshot
+  const url = core.getInput('url');
+
+  // Get screenshot destination
   const destFolder = process.env.RUNNER_TEMP;
   const destFile = 'screenshot.png';
   const dest = path.join(destFolder, destFile);
@@ -5019,7 +5022,7 @@ const io = __webpack_require__(1);
   const executablePath = await io.which('google-chrome');
 
   // Capture and write to dest
-  await captureWebsite.file('https://github.com/swinton', dest, {
+  await captureWebsite.file(url, dest, {
     launchOptions: {
       executablePath
     }
