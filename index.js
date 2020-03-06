@@ -16,5 +16,5 @@ const artifact = require('@actions/artifact');
   // Create an artifact
   const artifactClient = artifact.create();
   const artifactName = core.getInput('artifact-name');
-  const uploadResult = await artifactClient.uploadArtifact(artifactName, [destFile], destFolder);
+  const uploadResult = await artifactClient.uploadArtifact(artifactName, [dest], destFolder);
 })();
