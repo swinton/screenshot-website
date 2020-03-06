@@ -6,7 +6,7 @@ const artifact = require('@actions/artifact');
 
 (async () => {
   // Write to temporary directory
-  const destFolder = os.tmpdir();
+  const destFolder = process.env.RUNNER_TEMP;
   const destFile = 'screenshot.png';
   const dest = path.join(destFolder, destFile);
 
@@ -17,4 +17,7 @@ const artifact = require('@actions/artifact');
   const artifactClient = artifact.create();
   const artifactName = core.getInput('artifact-name');
   const uploadResult = await artifactClient.uploadArtifact(artifactName, [dest], destFolder);
+
+  // Expose the path to the screenshot as an output
+  core.setOutput('path', dest);
 })();
