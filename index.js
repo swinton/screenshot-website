@@ -1,3 +1,4 @@
+const os = require('os');
 const path = require('path');
 const captureWebsite = require('capture-website');
 const core = require('@actions/core');
