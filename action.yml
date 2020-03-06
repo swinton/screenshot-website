@@ -4,6 +4,10 @@ inputs:
   url:
     description: 'URL to screenshot'
     required: true
+  full-page:
+    description: 'Capture the full scrollable page, not just the viewport'
+    required: false
+    default: 'true'
   artifact-name:
     description: 'The name of the artifact representing the generated screenshot'
     required: true

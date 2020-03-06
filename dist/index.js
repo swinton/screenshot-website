@@ -5021,12 +5021,16 @@ const io = __webpack_require__(1);
   // Locate google-chrome
   const executablePath = await io.which('google-chrome');
 
-  // Capture and write to dest
-  await captureWebsite.file(url, dest, {
+  // Options for capture
+  const options = {
+    fullPage: core.getInput('full-page') === 'true' ? true : false,
     launchOptions: {
       executablePath
     }
-  });
+  };
+
+  // Capture and write to dest
+  await captureWebsite.file(url, dest, options);
 
   // Create an artifact
   const artifactClient = artifact.create();
