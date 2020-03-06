@@ -4613,12 +4613,15 @@ function childrenIgnored (self, path) {
 /***/ 104:
 /***/ (function(__unusedmodule, __unusedexports, __webpack_require__) {
 
+const path = __webpack_require__(622);
 const captureWebsite = __webpack_require__(89);
 const core = __webpack_require__(470);
 
 (async () => {
-  await captureWebsite.file('https://github.com/swinton', `${ __dirname }/screenshot.png`, {launchOptions: {executablePath: '/usr/bin/google-chrome'}});
-  core.setOutput('path', `${ __dirname }/screenshot.png`);
+  const dest = path.join(os.tmpdir(), 'screenshot.png');
+
+  await captureWebsite.file('https://github.com/swinton', dest, {launchOptions: {executablePath: '/usr/bin/google-chrome'}});
+  core.setOutput('path', dest);
 })();
 
 

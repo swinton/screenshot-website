@@ -1,7 +1,10 @@
+const path = require('path');
 const captureWebsite = require('capture-website');
 const core = require('@actions/core');
 
 (async () => {
-  await captureWebsite.file('https://github.com/swinton', `${ __dirname }/screenshot.png`, {launchOptions: {executablePath: '/usr/bin/google-chrome'}});
-  core.setOutput('path', `${ __dirname }/screenshot.png`);
+  const dest = path.join(os.tmpdir(), 'screenshot.png');
+
+  await captureWebsite.file('https://github.com/swinton', dest, {launchOptions: {executablePath: '/usr/bin/google-chrome'}});
+  core.setOutput('path', dest);
 })();
