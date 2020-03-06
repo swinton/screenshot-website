@@ -16,5 +16,7 @@ const puppeteer = require('puppeteer');
 
   console.log('Dimensions:', dimensions);
 
+  await page.screenshot({path: 'swinton'});
+
   await browser.close();
 })();
