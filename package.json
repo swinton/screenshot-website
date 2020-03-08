@@ -16,12 +16,11 @@
     "test": "jest && eslint index.js 'lib/**.js' 'test/**.js'",
     "lint": "eslint index.js 'lib/**.js' 'test/**.js' --fix",
     "package": "ncc build index.js -o dist",
-    "precommit": "npm run package && git add dist/"
+    "pre-commit": "npm run package && git add dist/"
   },
   "dependencies": {
     "@actions/artifact": "^0.1.0",
     "@actions/core": "^1.2.3",
-    "@actions/io": "^1.0.2",
     "bunyan": "^1.8.12",
     "bunyan-format": "^0.2.1",
     "capture-website": "^0.8.1",

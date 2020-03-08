@@ -2,7 +2,6 @@ const path = require('path');
 const captureWebsite = require('capture-website');
 const core = require('@actions/core');
 const artifact = require('@actions/artifact');
-const io = require('@actions/io');
 
 async function run() {
   try {
@@ -42,8 +41,9 @@ async function run() {
     const artifactName = destFile.substr(0, destFile.lastIndexOf('.'));
     const uploadResult = await artifactClient.uploadArtifact(artifactName, [dest], destFolder);
 
-  // Expose the path to the screenshot as an output
-  core.setOutput('path', dest);  } catch (error) {
+    // Expose the path to the screenshot as an output
+    core.setOutput('path', dest);
+  } catch (error) {
     core.setFailed(error.message);
   }
 }
