@@ -5002,44 +5002,48 @@ function childrenIgnored (self, path) {
 /***/ 104:
 /***/ (function(__unusedmodule, __unusedexports, __webpack_require__) {
 
-const os = __webpack_require__(87);
 const path = __webpack_require__(622);
 const captureWebsite = __webpack_require__(89);
 const core = __webpack_require__(470);
 const artifact = __webpack_require__(330);
 const io = __webpack_require__(1);
 
-(async () => {
-  // Get source to screenshot
-  const source = core.getInput('source');
+async function run() {
+  try {
+    // Get source to screenshot
+    const source = core.getInput('source');
 
-  // Get destination
-  const destFolder = process.env.RUNNER_TEMP;
-  const destFile = core.getInput('destination');
-  const dest = path.join(destFolder, destFile);
+    // Get destination
+    const destFolder = process.env.RUNNER_TEMP;
+    const destFile = core.getInput('destination');
+    const dest = path.join(destFolder, destFile);
 
-  // Locate google-chrome
-  const executablePath = await io.which('google-chrome');
+    // Locate google-chrome
+    const executablePath = await io.which('google-chrome');
 
-  // Options for capture
-  const options = {
-    fullPage: core.getInput('full-page') === 'true',
-    launchOptions: {
-      executablePath
-    }
-  };
+    // Options for capture
+    const options = {
+      fullPage: core.getInput('full-page') === 'true',
+      launchOptions: {
+        executablePath
+      }
+    };
 
-  // Capture and write to dest
-  await captureWebsite.file(source, dest, options);
+    // Capture and write to dest
+    await captureWebsite.file(source, dest, options);
 
-  // Create an artifact
-  const artifactClient = artifact.create();
-  const artifactName = destFile.substr(0, destFile.lastIndexOf('.'));
-  const uploadResult = await artifactClient.uploadArtifact(artifactName, [dest], destFolder);
+    // Create an artifact
+    const artifactClient = artifact.create();
+    const artifactName = destFile.substr(0, destFile.lastIndexOf('.'));
+    const uploadResult = await artifactClient.uploadArtifact(artifactName, [dest], destFolder);
 
   // Expose the path to the screenshot as an output
-  core.setOutput('path', dest);
-})();
+  core.setOutput('path', dest);  } catch (error) {
+    core.setFailed(error.message);
+  }
+}
+
+run();
 
 
 /***/ }),
