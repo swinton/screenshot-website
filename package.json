@@ -15,7 +15,8 @@
     "dev": "nodemon",
     "test": "jest && eslint index.js 'lib/**.js' 'test/**.js'",
     "lint": "eslint index.js 'lib/**.js' 'test/**.js' --fix",
-    "package": "ncc build index.js -o dist"
+    "package": "ncc build index.js -o dist",
+    "precommit": "npm run package && git add dist/"
   },
   "dependencies": {
     "@actions/artifact": "^0.1.0",
@@ -36,6 +37,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.18.3",
+    "husky": "^4.2.3",
     "jest": "^25.1.0",
     "nodemon": "^2.0.2",
     "prettier": "^1.19.1"
