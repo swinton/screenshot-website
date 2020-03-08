@@ -1,5 +1,3 @@
-# JavaScript
+# :camera_flash: `screenshot-website`
+> Capture screenshot of a website
 
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
-
-How I JavaScript.

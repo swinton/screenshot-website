@@ -1,11 +1,11 @@
-name: 'screenshot-url'
-description: 'Take a screenshot of a URL'
+name: 'screenshot-website'
+description: 'Capture screenshot of a website'
 inputs:
   source:
     description: 'Source of the content to be captured, may be a URL or HTML content'
     required: true
   destination:
-    description: 'The destination filename the captured screenshot will be written to'
+    description: 'The destination filename the captured website will be written to'
     required: false
     default: 'screenshot.png'
   full-page:
@@ -14,7 +14,7 @@ inputs:
     default: 'true'
 outputs:
   path:
-    description: 'The filesystem path to the generated screenshot'
+    description: 'The filesystem path to the website screenshot'
 runs:
   using: 'node12'
   main: 'dist/index.js'
