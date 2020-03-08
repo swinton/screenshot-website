@@ -1,3 +1,3 @@
 # :camera_flash: `screenshot-website`
-> Capture screenshot of a website
+> A GitHub Action to capture screenshots of a website, across Windows, Mac, and Linux
 
