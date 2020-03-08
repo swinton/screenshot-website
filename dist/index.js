@@ -5023,11 +5023,11 @@ async function run() {
     // "chrome.exe" on Windows
     // "Google Chrome" on macOSs
     const executables = {
-      Linux: 'google-chrome',
+      Linux: '/usr/bin/google-chrome',
       Windows: 'chrome.exe',
-      macOS: 'Google Chrome',
+      macOS: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
     };
-    const executablePath = await io.which(executables[process.env.RUNNER_OS]);
+    const executablePath = executables[process.env.RUNNER_OS];
     core.debug(`executablePath is ${executablePath}`);
 
     // Options for capture
