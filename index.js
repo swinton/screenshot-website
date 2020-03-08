@@ -20,7 +20,7 @@ async function run() {
     // "Google Chrome" on macOSs
     const executables = {
       Linux: '/usr/bin/google-chrome',
-      Windows: 'chrome.exe',
+      Windows: 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
       macOS: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
     };
     const executablePath = executables[process.env.RUNNER_OS];
