@@ -5019,7 +5019,10 @@ async function run() {
     const dest = path.join(destFolder, destFile);
 
     // Locate google-chrome
+    // TODO: "chrome.exe" on Windows
+    // TODO: "Google Chrome" on macOSs
     const executablePath = await io.which('google-chrome');
+    core.debug(`executablePath is ${executablePath}`);
 
     // Options for capture
     const options = {
