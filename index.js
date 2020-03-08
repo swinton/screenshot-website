@@ -14,10 +14,16 @@ async function run() {
     const destFile = core.getInput('destination');
     const dest = path.join(destFolder, destFile);
 
-    // Locate google-chrome
-    // TODO: "chrome.exe" on Windows
-    // TODO: "Google Chrome" on macOSs
-    const executablePath = await io.which('google-chrome');
+    // Locate Google Chrome executable
+    // "google-chrome" on Linux
+    // "chrome.exe" on Windows
+    // "Google Chrome" on macOSs
+    const executables = {
+      Linux: 'google-chrome',
+      Windows: 'chrome.exe',
+      macOS: 'Google Chrome',
+    };
+    const executablePath = await io.which(executables[process.env.RUNNER_OS]);
     core.debug(`executablePath is ${executablePath}`);
 
     // Options for capture
