@@ -6,7 +6,11 @@ on:
 jobs:
   screenshot:
     name: Screenshot
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        fail-fast: false
+    runs-on: ${{ matrix.os }}
     steps:
     - name: Checkout
       uses: actions/checkout@v1.0.0
@@ -16,4 +20,4 @@ jobs:
       uses: ./
       with:
         source: https://github.com/swinton
-        destination: github-com-swinton.png
+        destination: github-com-swinton-${{ matrix.os }}.png
