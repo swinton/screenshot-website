@@ -5010,12 +5010,12 @@ const artifact = __webpack_require__(330);
 const io = __webpack_require__(1);
 
 (async () => {
-  // Get URL to screenshot
-  const url = core.getInput('url');
+  // Get source to screenshot
+  const source = core.getInput('source');
 
-  // Get screenshot destination
+  // Get destination
   const destFolder = process.env.RUNNER_TEMP;
-  const destFile = 'screenshot.png';
+  const destFile = core.getInput('destination');
   const dest = path.join(destFolder, destFile);
 
   // Locate google-chrome
@@ -5023,18 +5023,18 @@ const io = __webpack_require__(1);
 
   // Options for capture
   const options = {
-    fullPage: core.getInput('full-page') === 'true' ? true : false,
+    fullPage: core.getInput('full-page') === 'true',
     launchOptions: {
       executablePath
     }
   };
 
   // Capture and write to dest
-  await captureWebsite.file(url, dest, options);
+  await captureWebsite.file(source, dest, options);
 
   // Create an artifact
   const artifactClient = artifact.create();
-  const artifactName = core.getInput('artifact-name');
+  const artifactName = destFile.substr(0, destFile.lastIndexOf('.'));
   const uploadResult = await artifactClient.uploadArtifact(artifactName, [dest], destFolder);
 
   // Expose the path to the screenshot as an output
