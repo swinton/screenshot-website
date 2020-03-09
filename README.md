@@ -40,6 +40,8 @@ _Most_ of the options listed [here](https://github.com/sindresorhus/capture-webs
 
 ## Outputs
 
+An [artifact](https://help.github.com/en/actions/configuring-and-managing-workflows/persisting-workflow-data-using-artifacts) will be created automatically for each screenshot captured. The following additional outputs are also supported:
+
 1. `path`: The filesystem path to the captured screenshot
 
 ## Advanced Usage
