@@ -1,4 +1,4 @@
-# :camera_flash: `screenshot-website`
+# :camera_flash: `screenshot-website` ![](https://github.com/swinton/screenshot-website/workflows/Tests/badge.svg)
 > A GitHub Action to capture screenshots of a website, across Windows, Mac, and Linux
 
 ## Usage
