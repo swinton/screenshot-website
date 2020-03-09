@@ -12,7 +12,7 @@
 
 ```yaml
 - name: Screenshot Website
-  uses: swinton/screenshot-website@v1
+  uses: swinton/screenshot-website@v1.x
   with:
     source: https://github.com/swinton/screenshot-website
     destination: screenshot.png
@@ -31,7 +31,7 @@ _Most_ of the options listed [here](https://github.com/sindresorhus/capture-webs
 
 ```yaml
 - name: Screenshot Website
-  uses: swinton/screenshot-website@v1
+  uses: swinton/screenshot-website@v1.x
   with:
     source: https://github.com/swinton/screenshot-website
     destination: screenshot.png
@@ -60,7 +60,7 @@ jobs:
     steps:
 
     - name: Screenshot Website
-      uses: swinton/screenshot-website@v1
+      uses: swinton/screenshot-website@v1.x
       with:
         source: https://github.com/swinton/screenshot-website
         destination: screenshot-${{ matrix.os }}.png
@@ -81,7 +81,7 @@ jobs:
     steps:
 
     - name: Screenshot Website
-      uses: swinton/screenshot-website@v1
+      uses: swinton/screenshot-website@v1.x
       with:
         source: https://github.com/swinton/screenshot-website
         destination: screenshot-${{ matrix.os }}-${{ matrix.width }}.png
