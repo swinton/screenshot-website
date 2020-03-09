@@ -5133,7 +5133,6 @@ async function run() {
     core.debug(`destination is ${destFile}`);
     core.debug(`other inputs are ${JSON.stringify(inputs, null, 4)}`);
 
-
     // Get destination
     const destFolder = process.env.RUNNER_TEMP;
     const dest = path.join(destFolder, destFile);
