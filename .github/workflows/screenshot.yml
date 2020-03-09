@@ -9,6 +9,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
+        width: [1200, 992, 768, 600]
     runs-on: ${{ matrix.os }}
     steps:
     - name: Checkout
@@ -24,5 +25,6 @@ jobs:
       uses: ./
       with:
         source: https://github.com/swinton/screenshot-website
-        destination: github-com-swinton-screenshot-website-${{ matrix.os }}.png
+        destination: github-com-swinton-screenshot-website-${{ matrix.os }}-${{ matrix.width }}.png
         full-page: true
+        width: ${{ matrix.width }}
