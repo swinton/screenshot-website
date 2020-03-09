@@ -1,6 +1,13 @@
 # :camera_flash: `screenshot-website` ![](https://github.com/swinton/screenshot-website/workflows/Tests/badge.svg)
 > A GitHub Action to capture screenshots of a website, across Windows, Mac, and Linux
 
+## Contents
+- [Usage](#usage)
+- [Inputs](#inputs)
+- [Outputs](#outputs)
+- [Advanced Usage](#advanced-usage)
+- [Credits](#credits)
+
 ## Usage
 
 ```yaml
@@ -11,9 +18,16 @@
     destination: screenshot.png
 ```
 
-## Options
+## Inputs
 
-_Most_ of the options listed [here](https://github.com/sindresorhus/capture-website#options) (`inputType`, `width`, `height`, etc.) are also supported, just pass in a [kebab-cased](https://en.wikipedia.org/wiki/Letter_case#Special_case_styles) equivalent, e.g. for [`fullPage`](https://github.com/sindresorhus/capture-website#fullpage):
+### Required inputs
+
+1. `source`: Source of the content to be captured, may be a URL or HTML string, e.g. `https://example.com/`
+1. `destination`: Destination filename the captured website will be written to, defaults to `screenshot.png`
+
+### Optional inputs
+
+_Most_ of the options listed [here](https://github.com/sindresorhus/capture-website#options) (`inputType`, `width`, `height`, etc.) can be passed as inputs, just pass in a [kebab-cased](https://en.wikipedia.org/wiki/Letter_case#Special_case_styles) equivalent, e.g. `full-page` for [`fullPage`](https://github.com/sindresorhus/capture-website#fullpage):
 
 ```yaml
 - name: Screenshot Website
@@ -23,6 +37,10 @@ _Most_ of the options listed [here](https://github.com/sindresorhus/capture-webs
     destination: screenshot.png
     full-page: true
 ```
+
+## Outputs
+
+1. `path`: The filesystem path to the captured screenshot
 
 ## Advanced Usage
 
