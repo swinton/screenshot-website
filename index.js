@@ -2,15 +2,19 @@ const path = require('path');
 const captureWebsite = require('capture-website');
 const core = require('@actions/core');
 const artifact = require('@actions/artifact');
+const loadInputs = require('./lib/load-inputs');
 
 async function run() {
   try {
-    // Get source to screenshot
-    const source = core.getInput('source');
+    // Get inputs: source, destination, and anything else
+    const { source, destination: destFile, inputs } = loadInputs();
+    core.debug(`source is ${source}`);
+    core.debug(`destination is ${destFile}`);
+    core.debug(`options are ${JSON.stringify(options, null, 4)}`);
+
 
     // Get destination
     const destFolder = process.env.RUNNER_TEMP;
-    const destFile = core.getInput('destination');
     const dest = path.join(destFolder, destFile);
 
     // Locate Google Chrome executable
@@ -27,10 +31,10 @@ async function run() {
 
     // Options for capture
     const options = {
-      fullPage: core.getInput('full-page') === 'true',
       launchOptions: {
         executablePath
-      }
+      },
+      ...inputs
     };
 
     // Capture and write to dest

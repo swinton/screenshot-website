@@ -8,10 +8,6 @@ inputs:
     description: 'The destination filename the captured website will be written to'
     required: false
     default: 'screenshot.png'
-  full-page:
-    description: 'Capture the full scrollable page, not just the viewport'
-    required: false
-    default: 'true'
 outputs:
   path:
     description: 'The filesystem path to the website screenshot'

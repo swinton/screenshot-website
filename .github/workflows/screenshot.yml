@@ -20,3 +20,4 @@ jobs:
       with:
         source: https://github.com/swinton/screenshot-website
         destination: github-com-swinton-screenshot-website-${{ matrix.os }}.png
+        full-page: true
