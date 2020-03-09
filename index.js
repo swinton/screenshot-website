@@ -7,7 +7,7 @@ const loadInputs = require('./lib/load-inputs');
 async function run() {
   try {
     // Get inputs: source, destination, and anything else
-    const { source, destination: destFile, inputs } = loadInputs();
+    const { source, destination: destFile, ...inputs } = loadInputs();
     core.debug(`source is ${source}`);
     core.debug(`destination is ${destFile}`);
     core.debug(`other inputs are ${JSON.stringify(inputs, null, 4)}`);
