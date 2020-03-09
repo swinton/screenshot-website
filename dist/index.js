@@ -5131,7 +5131,7 @@ async function run() {
     const { source, destination: destFile, inputs } = loadInputs();
     core.debug(`source is ${source}`);
     core.debug(`destination is ${destFile}`);
-    core.debug(`options are ${JSON.stringify(options, null, 4)}`);
+    core.debug(`other inputs are ${JSON.stringify(inputs, null, 4)}`);
 
 
     // Get destination
