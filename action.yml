@@ -8,6 +8,14 @@ inputs:
     description: 'The destination filename the captured website will be written to'
     required: false
     default: 'screenshot.png'
+  delay:
+    description: 'The number of seconds to wait after the page finished loading before capturing the screenshot'
+    required: false
+    default: 0
+  full-page:
+    description: 'Capture the full scrollable page, not just the viewport'
+    required: false
+    default: false
 outputs:
   path:
     description: 'The filesystem path to the website screenshot'
