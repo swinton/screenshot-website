@@ -12,6 +12,10 @@ inputs:
     description: 'The number of seconds to wait after the page finished loading before capturing the screenshot'
     required: false
     default: 0
+  debug:
+    description: 'Print debug info in the console'
+    required: false
+    default: false
   full-page:
     description: 'Capture the full scrollable page, not just the viewport'
     required: false
