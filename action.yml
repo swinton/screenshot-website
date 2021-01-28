@@ -16,6 +16,9 @@ inputs:
     description: 'Capture the full scrollable page, not just the viewport'
     required: false
     default: 'false'
+  width:
+    description: 'Page width'
+    required: false
 outputs:
   path:
     description: 'The filesystem path to the website screenshot'
