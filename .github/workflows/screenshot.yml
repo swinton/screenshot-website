@@ -1,7 +1,7 @@
 name: Tests
 
 on:
-  [ push, workflow_dispatch ]
+  [ push, pull_request, workflow_dispatch ]
 
 jobs:
   screenshot-ubuntu:
@@ -69,3 +69,20 @@ jobs:
         destination: github-com-swinton-screenshot-website-${{ matrix.os }}-${{ matrix.width }}.png
         full-page: true
         width: ${{ matrix.width }}
+
+  screenshot-no-width:
+    name: Screenshot (no width)
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Capture Screenshot
+      id: screenshot
+      uses: ./
+      with:
+        source: https://github.com/swinton/screenshot-website
+        destination: github-com-swinton-screenshot-website-ubuntu-latest-default.png
+        full-page: true
