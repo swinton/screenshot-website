@@ -19,6 +19,7 @@ inputs:
   width:
     description: 'Page width'
     required: false
+    default: '1280'
 outputs:
   path:
     description: 'The filesystem path to the website screenshot'
