@@ -1,0 +1,62 @@
+name: E2E
+
+on:
+  [ workflow_dispatch ]
+
+jobs:
+  screenshot-ubuntu:
+    name: Screenshot (Ubuntu)
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        width: [1200, 992, 768, 600]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+
+    - name: Capture Screenshot
+      id: screenshot
+      uses: swinton/screenshot-website@v1.x
+      with:
+        source: https://github.com/swinton/screenshot-website
+        destination: github-com-swinton-screenshot-website-${{ matrix.os }}-${{ matrix.width }}.png
+        full-page: true
+        width: ${{ matrix.width }}
+
+  screenshot-macos:
+    name: Screenshot (macOS)
+    strategy:
+      matrix:
+        os: [macos-latest]
+        width: [1200, 992, 768, 600]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+
+    - name: Capture Screenshot
+      id: screenshot
+      uses: swinton/screenshot-website@v1.x
+      with:
+        source: https://github.com/swinton/screenshot-website
+        destination: github-com-swinton-screenshot-website-${{ matrix.os }}-${{ matrix.width }}.png
+        full-page: true
+        width: ${{ matrix.width }}
+
+  screenshot-windows:
+    name: Screenshot (Windows)
+    strategy:
+      matrix:
+        os: [windows-latest]
+        width: [1200, 992, 768, 600]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+
+    - name: Capture Screenshot
+      id: screenshot
+      uses: swinton/screenshot-website@v1.x
+      with:
+        source: https://github.com/swinton/screenshot-website
+        destination: github-com-swinton-screenshot-website-${{ matrix.os }}-${{ matrix.width }}.png
+        full-page: true
+        width: ${{ matrix.width }}
