@@ -1,7 +1,10 @@
 name: E2E
 
 on:
-  [ workflow_dispatch ]
+  push:
+    branches:
+      - v1.x
+  workflow_dispatch:
 
 jobs:
   screenshot-ubuntu:
