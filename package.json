@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@actions/artifact": "^0.1.0",
-    "@actions/core": "^1.2.3",
+    "@actions/core": "^1.2.6",
     "bunyan": "^1.8.12",
     "bunyan-format": "^0.2.1",
     "capture-website": "^0.8.1",
