@@ -34,8 +34,11 @@ _Most_ of the options listed [here](https://github.com/sindresorhus/capture-webs
   uses: swinton/screenshot-website@v1.x
   with:
     source: https://github.com/swinton/screenshot-website
-    destination: screenshot.png
+    destination: screenshot.jpeg
+    type: jpeg
     full-page: true
+    scale-factor: 0.5
+    width: 1600
 ```
 
 ## Outputs
