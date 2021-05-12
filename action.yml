@@ -8,6 +8,10 @@ inputs:
     description: 'The destination filename the captured website will be written to'
     required: false
     default: 'screenshot.png'
+  type:
+    description: 'Image type : png or jpeg'
+    required: false
+    default: 'png'
   delay:
     description: 'The number of seconds to wait after the page finished loading before capturing the screenshot'
     required: false
@@ -20,6 +24,10 @@ inputs:
     description: 'Page width'
     required: false
     default: '1280'
+  scale-factor:
+    description: 'Webpage scale factor'
+    required: false
+    default: '2'
 outputs:
   path:
     description: 'The filesystem path to the website screenshot'
