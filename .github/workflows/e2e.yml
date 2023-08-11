@@ -6,6 +6,10 @@ on:
       - v1.x
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   screenshot-ubuntu:
     name: Screenshot (Ubuntu)
