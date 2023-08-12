@@ -25,7 +25,7 @@
     "bunyan": "^1.8.12",
     "bunyan-format": "^0.2.1",
     "capture-website": "^0.8.1",
-    "dotenv": "^8.2.0",
+    "dotenv": "^16.3.1",
     "js-yaml": "^3.13.1",
     "puppeteer": "^2.1.1"
   },
