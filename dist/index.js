@@ -19,7 +19,13 @@ module.exports =
 /******/ 		};
 /******/
 /******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/ 		var threw = true;
+/******/ 		try {
+/******/ 			modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/ 			threw = false;
+/******/ 		} finally {
+/******/ 			if(threw) delete installedModules[moduleId];
+/******/ 		}
 /******/
 /******/ 		// Flag the module as loaded
 /******/ 		module.l = true;
@@ -9197,9 +9203,9 @@ module.exports = {
 /***/ }),
 
 /***/ 235:
-/***/ (function() {
+/***/ (function(module) {
 
-eval("require")("utf-8-validate");
+module.exports = eval("require")("utf-8-validate");
 
 
 /***/ }),
@@ -19531,9 +19537,9 @@ module.exports.safeLoad    = safeLoad;
 /***/ }),
 
 /***/ 459:
-/***/ (function() {
+/***/ (function(module) {
 
-eval("require")("bufferutil");
+module.exports = eval("require")("bufferutil");
 
 
 /***/ }),
