@@ -15,6 +15,7 @@
     "dev": "nodemon",
     "test": "jest && eslint index.js 'lib/**.js' 'test/**.js'",
     "lint": "eslint index.js 'lib/**.js' 'test/**.js' --fix",
+    "build": "npm run package",
     "package": "ncc build index.js -o dist",
     "pre-commit": "npm run package && git add dist/"
   },
