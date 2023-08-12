@@ -27,7 +27,7 @@
     "capture-website": "^0.8.1",
     "dotenv": "^16.3.1",
     "js-yaml": "^4.1.0",
-    "puppeteer": "^2.1.1"
+    "puppeteer": "^21.0.3"
   },
   "devDependencies": {
     "@zeit/ncc": "^0.22.3",
