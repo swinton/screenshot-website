@@ -24,7 +24,7 @@ jobs:
         id: dependabot-metadata
         uses: dependabot/fetch-metadata@c9c4182bf1b97f5224aee3906fd373f6b61b4526 # v1.6.0
         with:
-          github-token: "${{ secrets.GITHUB_TOKEN }}"
+          github-token: "${{ github.token }}"
   build-dependabot-changes:
     runs-on: ubuntu-latest
     needs: [fetch-dependabot-metadata]
