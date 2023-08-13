@@ -2788,49 +2788,55 @@ formatters.O = function (v) {
 
 /***/ }),
 /* 82 */
-/***/ (function(__unusedmodule, exports) {
+/***/ (function(module, __unusedexports, __webpack_require__) {
 
-"use strict";
+const path = __webpack_require__(622);
+const captureWebsite = __webpack_require__(89);
+const core = __webpack_require__(470);
+const artifact = __webpack_require__(214);
+const loadInputs = __webpack_require__(480);
+const whichChrome = __webpack_require__(458);
 
-// We use any as a valid input type
-/* eslint-disable @typescript-eslint/no-explicit-any */
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.toCommandProperties = exports.toCommandValue = void 0;
-/**
- * Sanitizes an input into a string so it can be passed into issueCommand safely
- * @param input input to sanitize into a string
- */
-function toCommandValue(input) {
-    if (input === null || input === undefined) {
-        return '';
-    }
-    else if (typeof input === 'string' || input instanceof String) {
-        return input;
-    }
-    return JSON.stringify(input);
-}
-exports.toCommandValue = toCommandValue;
-/**
- *
- * @param annotationProperties
- * @returns The command properties to send with the actual annotation command
- * See IssueCommandProperties: https://github.com/actions/runner/blob/main/src/Runner.Worker/ActionCommandManager.cs#L646
- */
-function toCommandProperties(annotationProperties) {
-    if (!Object.keys(annotationProperties).length) {
-        return {};
-    }
-    return {
-        title: annotationProperties.title,
-        file: annotationProperties.file,
-        line: annotationProperties.startLine,
-        endLine: annotationProperties.endLine,
-        col: annotationProperties.startColumn,
-        endColumn: annotationProperties.endColumn
+async function run() {
+  try {
+    // Get inputs: source, destination, and anything else
+    const { source, destination: destFile, ...inputs } = loadInputs();
+    core.debug(`source is ${source}`);
+    core.debug(`destination is ${destFile}`);
+    core.debug(`other inputs are ${JSON.stringify(inputs, null, 4)}`);
+
+    // Get destination
+    const destFolder = process.env.RUNNER_TEMP;
+    const dest = path.join(destFolder, destFile);
+
+    // Locate Google Chrome executable
+    const executablePath = await whichChrome();
+    core.debug(`executablePath is ${executablePath}`);
+
+    // Options for capture
+    const options = {
+      launchOptions: {
+        executablePath
+      },
+      ...inputs
     };
+
+    // Capture and write to dest
+    await captureWebsite.file(source, dest, options);
+
+    // Create an artifact
+    const artifactClient = artifact.create();
+    const artifactName = destFile.substr(0, destFile.lastIndexOf('.'));
+    const uploadResult = await artifactClient.uploadArtifact(artifactName, [dest], destFolder);
+
+    // Expose the path to the screenshot as an output
+    core.setOutput('path', dest);
+  } catch (error) {
+    core.setFailed(error.message);
+  }
 }
-exports.toCommandProperties = toCommandProperties;
-//# sourceMappingURL=utils.js.map
+
+module.exports = run;
 
 /***/ }),
 /* 83 */,
@@ -4918,7 +4924,7 @@ exports.prepareKeyValueMessage = exports.issueFileCommand = void 0;
 const fs = __importStar(__webpack_require__(747));
 const os = __importStar(__webpack_require__(87));
 const uuid_1 = __webpack_require__(25);
-const utils_1 = __webpack_require__(82);
+const utils_1 = __webpack_require__(394);
 function issueFileCommand(command, message) {
     const filePath = process.env[`GITHUB_${command}`];
     if (!filePath) {
@@ -4954,54 +4960,9 @@ exports.prepareKeyValueMessage = prepareKeyValueMessage;
 /* 104 */
 /***/ (function(__unusedmodule, __unusedexports, __webpack_require__) {
 
-const path = __webpack_require__(622);
-const captureWebsite = __webpack_require__(89);
-const core = __webpack_require__(470);
-const artifact = __webpack_require__(214);
-const loadInputs = __webpack_require__(480);
-const whichChrome = __webpack_require__(458);
-
-async function run() {
-  try {
-    // Get inputs: source, destination, and anything else
-    const { source, destination: destFile, ...inputs } = loadInputs();
-    core.debug(`source is ${source}`);
-    core.debug(`destination is ${destFile}`);
-    core.debug(`other inputs are ${JSON.stringify(inputs, null, 4)}`);
-
-    // Get destination
-    const destFolder = process.env.RUNNER_TEMP;
-    const dest = path.join(destFolder, destFile);
-
-    // Locate Google Chrome executable
-    const executablePath = await whichChrome();
-    core.debug(`executablePath is ${executablePath}`);
-
-    // Options for capture
-    const options = {
-      launchOptions: {
-        executablePath
-      },
-      ...inputs
-    };
-
-    // Capture and write to dest
-    await captureWebsite.file(source, dest, options);
-
-    // Create an artifact
-    const artifactClient = artifact.create();
-    const artifactName = destFile.substr(0, destFile.lastIndexOf('.'));
-    const uploadResult = await artifactClient.uploadArtifact(artifactName, [dest], destFolder);
-
-    // Expose the path to the screenshot as an output
-    core.setOutput('path', dest);
-  } catch (error) {
-    core.setFailed(error.message);
-  }
-}
+const run = __webpack_require__(82);
 
 run();
-
 
 /***/ }),
 /* 105 */,
@@ -14506,7 +14467,52 @@ exports.permuteDomain = permuteDomain;
 /* 391 */,
 /* 392 */,
 /* 393 */,
-/* 394 */,
+/* 394 */
+/***/ (function(__unusedmodule, exports) {
+
+"use strict";
+
+// We use any as a valid input type
+/* eslint-disable @typescript-eslint/no-explicit-any */
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.toCommandProperties = exports.toCommandValue = void 0;
+/**
+ * Sanitizes an input into a string so it can be passed into issueCommand safely
+ * @param input input to sanitize into a string
+ */
+function toCommandValue(input) {
+    if (input === null || input === undefined) {
+        return '';
+    }
+    else if (typeof input === 'string' || input instanceof String) {
+        return input;
+    }
+    return JSON.stringify(input);
+}
+exports.toCommandValue = toCommandValue;
+/**
+ *
+ * @param annotationProperties
+ * @returns The command properties to send with the actual annotation command
+ * See IssueCommandProperties: https://github.com/actions/runner/blob/main/src/Runner.Worker/ActionCommandManager.cs#L646
+ */
+function toCommandProperties(annotationProperties) {
+    if (!Object.keys(annotationProperties).length) {
+        return {};
+    }
+    return {
+        title: annotationProperties.title,
+        file: annotationProperties.file,
+        line: annotationProperties.startLine,
+        endLine: annotationProperties.endLine,
+        col: annotationProperties.startColumn,
+        endColumn: annotationProperties.endColumn
+    };
+}
+exports.toCommandProperties = toCommandProperties;
+//# sourceMappingURL=utils.js.map
+
+/***/ }),
 /* 395 */,
 /* 396 */,
 /* 397 */,
@@ -14737,7 +14743,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.issue = exports.issueCommand = void 0;
 const os = __importStar(__webpack_require__(87));
-const utils_1 = __webpack_require__(82);
+const utils_1 = __webpack_require__(394);
 /**
  * Commands
  *
@@ -18403,7 +18409,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getIDToken = exports.getState = exports.saveState = exports.group = exports.endGroup = exports.startGroup = exports.info = exports.notice = exports.warning = exports.error = exports.debug = exports.isDebug = exports.setFailed = exports.setCommandEcho = exports.setOutput = exports.getBooleanInput = exports.getMultilineInput = exports.getInput = exports.addPath = exports.setSecret = exports.exportVariable = exports.ExitCode = void 0;
 const command_1 = __webpack_require__(431);
 const file_command_1 = __webpack_require__(102);
-const utils_1 = __webpack_require__(82);
+const utils_1 = __webpack_require__(394);
 const os = __importStar(__webpack_require__(87));
 const path = __importStar(__webpack_require__(622));
 const oidc_utils_1 = __webpack_require__(742);
